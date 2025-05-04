@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sidebar as SBar, Menu, MenuItem } from "react-pro-sidebar";
+import { Sidebar as SBar, Menu, MenuItem, menuClasses, sidebarClasses } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import { tokens } from "../../theme";
@@ -40,31 +40,29 @@ const Item = ({ title, to, icon }) => {
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
 
-  console.log(tokens(theme.palette.mode));
+  const [isCollapsed, setIsCollapsed] = useState(false);
   return (
     <Box
       sx={{
-        height: "100vh",
-        "& .ps-sidebar-root": {
-          backgroundColor: "${colors.primary[400]} !important",
+        [`& .${sidebarClasses.root}`]: {
+          backgroundColor: `${colors.primary[400]} !important`,
         },
-        "& .ps-menu-button": {
+        [`& .${menuClasses.button}`]: {
           padding: "5px 35px 5px 20px !important",
         },
-        "& .ps-menu-button:hover": {
-          color: "#868dfb !important",
+        [`& .${menuClasses.button}:hover`]: {
+          color: "#FFD700 !important",
         },
-        "& .ps-menuitem-root.ps-active": {
-          color: "#6870fa !important",
+        [`& .${menuClasses.active}`]: {
+          color: "#FFD700 !important",
         },
-        "& .ps-icon": {
+        [`& .${menuClasses.icon}`]: {
           backgroundColor: "transparent !important",
         },
       }}
     >
-      <SBar collapsed={isCollapsed} height="100%">
+      <SBar collapsed={isCollapsed} height="100%" transitionDuration={777}>
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
