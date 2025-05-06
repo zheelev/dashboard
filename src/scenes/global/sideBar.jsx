@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Sidebar as SBar, Menu, MenuItem, menuClasses, sidebarClasses } from "react-pro-sidebar";
+import {
+  Sidebar as SBar,
+  Menu,
+  MenuItem,
+  menuClasses,
+  SubMenu,
+} from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import { tokens } from "../../theme";
@@ -42,27 +48,19 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
 
   const [isCollapsed, setIsCollapsed] = useState(false);
+
   return (
     <Box
       sx={{
-        [`& .${sidebarClasses.root}`]: {
-          backgroundColor: `${colors.primary[400]} !important`,
-        },
-        [`& .${menuClasses.button}`]: {
-          padding: "5px 35px 5px 20px !important",
-        },
-        [`& .${menuClasses.button}:hover`]: {
-          color: "#FFD700 !important",
-        },
-        [`& .${menuClasses.active}`]: {
-          color: "#FFD700 !important",
-        },
-        [`& .${menuClasses.icon}`]: {
-          backgroundColor: "transparent !important",
-        },
+        display: "flex",
       }}
     >
-      <SBar collapsed={isCollapsed} height="100%" transitionDuration={777}>
+      <SBar
+        collapsed={isCollapsed}
+        height="100%"
+        transitionDuration={1000}
+        backgroundColor="inherit"
+      >
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
@@ -80,7 +78,7 @@ const Sidebar = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.grey[200]}>
+                <Typography variant="h3" color={colors.grey[400]}>
                   Dashboard
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
@@ -90,7 +88,7 @@ const Sidebar = () => {
             )}
           </MenuItem>
 
-          {!isCollapsed && (
+          {/*  {!isCollapsed && (
             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center">
                 <img
@@ -115,14 +113,10 @@ const Sidebar = () => {
                 </Typography>
               </Box>
             </Box>
-          )}
+          )} */}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
-              title="Dashboard"
-              to="/"
-              icon={<HomeOutlinedIcon />}
-            />
+            <Item title="Dashboard" to="/" icon={<HomeOutlinedIcon />} />
 
             <Typography
               variant="h6"
@@ -170,33 +164,44 @@ const Sidebar = () => {
               icon={<HelpOutlineOutlinedIcon />}
             />
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
+            <SubMenu
+              label="Charts"
               sx={{ m: "15px 0 5px 20px" }}
-            >
-              Charts
-            </Typography>
-            <Item
-              title="Bar Chart"
-              to="/bar"
               icon={<BarChartOutlinedIcon />}
-            />
-            <Item
-              title="Pie Chart"
-              to="/pie"
-              icon={<PieChartOutlineOutlinedIcon />}
-            />
-            <Item
-              title="Line Chart"
-              to="/line"
-              icon={<TimelineOutlinedIcon />}
-            />
-            <Item
-              title="Geography Chart"
-              to="/geography"
-              icon={<MapOutlinedIcon />}
-            />
+              rootStyles={{
+                ["& > ." + menuClasses.button]: {
+                  backgroundColor: "inherit",
+                  color: "#9f0099",
+                  "&:hover": {
+                    backgroundColor: "#eecef9",
+                  },
+                },
+                ["." + menuClasses.subMenuContent]: {
+                  backgroundColor: `${colors.primary[400]}`,
+                },
+              }}
+            >
+              <Item
+                title="Bar Chart"
+                to="/bar"
+                icon={<BarChartOutlinedIcon />}
+              />
+              <Item
+                title="Pie Chart"
+                to="/pie"
+                icon={<PieChartOutlineOutlinedIcon />}
+              />
+              <Item
+                title="Line Chart"
+                to="/line"
+                icon={<TimelineOutlinedIcon />}
+              />
+              <Item
+                title="Geography Chart"
+                to="/geography"
+                icon={<MapOutlinedIcon />}
+              />
+            </SubMenu>
           </Box>
         </Menu>
       </SBar>
