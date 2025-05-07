@@ -9,18 +9,20 @@ import {
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import { tokens } from "../../theme";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
-import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import {
+  HomeOutlined as HomeOutlinedIcon,
+  PeopleOutlined as PeopleOutlinedIcon,
+  ContactsOutlined as ContactsOutlinedIcon,
+  ReceiptOutlined as ReceiptOutlinedIcon,
+  PersonOutlined as PersonOutlinedIcon,
+  CalendarTodayOutlined as CalendarTodayOutlinedIcon,
+  HelpOutlineOutlined as HelpOutlineOutlinedIcon,
+  BarChartOutlined as BarChartOutlinedIcon,
+  PieChartOutlineOutlined as PieChartOutlineOutlinedIcon,
+  TimelineOutlined as TimelineOutlinedIcon,
+  MenuOutlined as MenuOutlinedIcon,
+  MapOutlined as MapOutlinedIcon,
+} from "@mui/icons-material";
 
 const Item = ({ title, to, icon }) => {
   const theme = useTheme();
@@ -30,13 +32,13 @@ const Item = ({ title, to, icon }) => {
 
   return (
     <MenuItem
-      active={isActive}
+      //active={isActive}
       style={{
         color: colors.grey[100],
+        backgroundColor: isActive ? colors.redAccent[600] : undefined,
       }}
       icon={icon}
       component={<Link to={to} />}
-      
     >
       <Typography>{title}</Typography>
     </MenuItem>
@@ -50,11 +52,7 @@ const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-      }}
-    >
+    <Box sx={{ display: "flex" }}>
       <SBar
         collapsed={isCollapsed}
         height="100%"
@@ -68,7 +66,7 @@ const Sidebar = () => {
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
               margin: "10px 0 20px 0",
-              color: colors.grey[100],
+              color: colors.grey[300],
             }}
           >
             {!isCollapsed && (
@@ -78,7 +76,7 @@ const Sidebar = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.grey[400]}>
+                <Typography variant="h3" color={colors.grey[100]}>
                   Dashboard
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
@@ -88,7 +86,7 @@ const Sidebar = () => {
             )}
           </MenuItem>
 
-          {/*  {!isCollapsed && (
+         {!isCollapsed && (
             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center">
                 <img
@@ -113,14 +111,20 @@ const Sidebar = () => {
                 </Typography>
               </Box>
             </Box>
-          )} */}
+          )} 
 
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+          <Box
+            sx={{
+              [`& .${menuClasses.button}:hover`]: {
+                backgroundColor: `${colors.redAccent[700]} !important`,
+              },
+            }}
+          >
             <Item title="Dashboard" to="/" icon={<HomeOutlinedIcon />} />
 
             <Typography
               variant="h6"
-              color={colors.grey[300]}
+              color={colors.redAccent[400]}
               sx={{ m: "15px 0 5px 20px" }}
             >
               Data
@@ -143,7 +147,7 @@ const Sidebar = () => {
 
             <Typography
               variant="h6"
-              color={colors.grey[300]}
+              color={colors.redAccent[400]}
               sx={{ m: "15px 0 5px 20px" }}
             >
               Pages
@@ -170,7 +174,7 @@ const Sidebar = () => {
               icon={<BarChartOutlinedIcon />}
               rootStyles={{
                 ["& > ." + menuClasses.button]: {
-                  backgroundColor: "inherit",
+                  backgroundColor: "ffff",
                   color: "#9f0099",
                   "&:hover": {
                     backgroundColor: "#eecef9",
