@@ -2,7 +2,7 @@
 
 An example dashboard with charts, tables, a calendar, and a sidebar layout — built with modern React tooling.
 
-![Dashboard Screenshot](./public/Dashboard.png.png)
+![Dashboard Screenshot](./public/Dashboard.png)
 
 ## 🚀 Technologies Used
 
